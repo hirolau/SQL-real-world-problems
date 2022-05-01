@@ -191,7 +191,7 @@ order by customer_id, date limit 20
 |             3 | 2021-05-31 00:00:00 |           1 |
 |             3 | 2021-06-30 00:00:00 |           1 |
 
-## 5. Adjust missied payments based on recoveries
+## 5. Adjust missed payments based on recoveries
 
 This problem is fun but a bit hard to describe:
 
