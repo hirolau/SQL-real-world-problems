@@ -8,9 +8,10 @@ This respository contains a small dataset and 5 questions I have encountered as 
 
 If you are unfamliar with window functions and recursion you will struggle with all but the first question. Go read up on those concepts first.
 
-To query the database, you can use Python + Jupyter Notebook + sqlite. Alternativly you can download some software build for querying SQLite databases, for example this: https://sqlitebrowser.org/. Note that window functions is a rather recent addition to the SQLite database, so make sure you are using a recent version.
+To query the database, you can use Python + Jupyter Notebook + sqlite. Alternativly you can download some software build for querying SQLite databases, for example this: https://sqlitebrowser.org/. Note that window functions is a rather recent addition to the SQLite database, so make sure you are using a recent version. 
 
-The database is in this repository, and is called `data.db`.
+The database is in this repository, and is called `data.db`. The data is also available
+in csv format in the folder `input_data`.
 
 *Answers will be posted soon.*
 
