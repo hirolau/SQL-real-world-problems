@@ -24,6 +24,8 @@ recovered_funds as (
 select *,
     -- sum_missed_payments = cumulative sum of missed payments from the bottom up.
     sum(missed_payments) over (partition by customer_id, default_period order by date desc) as sum_missed_payments,
+    
+    -- Not cumulative since we do not have a direction. Just need recovered amount available on every row.
     sum(recovered_amount)  over (partition by customer_id, default_period) as recovered_in_period,
     
     -- By subtracting cumulative sum from the total payments in the period we get a variable on how much
