@@ -13,7 +13,7 @@ To query the database, you can use Python + Jupyter Notebook + sqlite. Alternati
 The database is in this repository, and is called `data.db`. The data is also available
 in csv format in the folder `input_data`.
 
-*Answers will be posted soon.*
+My solutions to the problems are available in the answers folder, but please go ahead and try for yourself first.
 
 Enjoy!
 
@@ -53,13 +53,13 @@ select * from bond_prices order by date desc limit 15;
 |     238 | 2001-03-22 00:00:00 | 100.678 |         3 |
 |     298 | 2001-03-22 00:00:00 | 100.928 |         4 |
 
-### Difficluty:
+### Difficulty:
 
 Easy. If you claim to know SQL, this one you should be able to solve.
 
 ## 2. Convert and fill FX values for fund prices.
 
-We need to report foreign fund prices in USD each business day. But some days we are missing fund prices if the foregin fund has a holiday, and sometimes we are missing FX rates for various reasones.
+We need to report foreign fund prices in USD each business day. But some days we are missing fund prices if the foreign fund has a holiday, and sometimes we are missing FX rates for various reasons.
 
 ### Task:
 
@@ -150,7 +150,7 @@ Due to new internal rules this variable needs to be adjusted. If a customer defa
 
 Customer with customer_id=3 is a good starting point to look at.
 
-Make a select where the `defaulted` variable follows the new definition. See table below for a visual expamle.
+Make a select where the `defaulted` variable follows the new definition. See table below for a visual example.
 
 
 ![New definition of default](new_dod.png)
