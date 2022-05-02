@@ -86,7 +86,7 @@ select * from fund_prices order by fund_id, date desc limit 5
 |      75 | 2002-07-15 00:00:00 |         1 | 68.3395 | EUR        |
 
 ```sql
-select * from fund_prices order by fund_id, date desc limit 5
+select * from fx order by date desc limit 6
 ```
 
 |   index | date                | to_currency   | from_currency   |     rate |
