@@ -4,6 +4,8 @@
 -- before the recovery is cancelled out as much as possible by the recovered amount.
 
 with default_periods_prep as (
+    -- First I want a flag to that is unique to the period in which a recovery can cancel out missed payments.
+    -- I use when the default flag flips:
     select m.*, recovered_amount,
     case 
         when defaulted = 0 and lag(defaulted) over (partition by m.customer_id order by m.date) = 1 then 1 
