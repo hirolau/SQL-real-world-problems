@@ -26,7 +26,7 @@ select *,
     
     -- By subtracting cumulative sum from the total payments in the period we get a variable on how much
     -- we have left to subtract. As soon as this turns negative we should stop removing values!
-    -- On the first period it turn negative we need to take special care to get the correct amount.
+    
     sum(recovered_amount)  over (partition by customer_id, default_period) 
     - sum(missed_payments) over (partition by customer_id, default_period order by date desc) recoveries_left
     
@@ -35,6 +35,8 @@ from default_periods
 ),
 
 final_recovered_funds as (
+    -- On the first period recoveries_left turn negative we need to take special care to get the correct amount. Thus we create this help variable.
+    -- We did just run out of recoveries when out_of_funds == 1.
     select *, sum(case when recoveries_left <= 0 then 1 else 0 end) over (partition by customer_id, default_period order by date desc) as out_of_funds
     from recovered_funds
 )
