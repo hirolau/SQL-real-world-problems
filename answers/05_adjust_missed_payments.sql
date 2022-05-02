@@ -33,10 +33,14 @@ final_recovered_funds as (
     from recovered_funds
 )
 
-select customer_id, date, missed_payments, defaulted, recovered_amount,  
-    case 
-        when out_of_funds = 0 then 0 
-        when out_of_funds = 1 then -recoveries_left
-        else missed_payments
-    end as missed_payments_minus_recovered
-        from final_recovered_funds
+select customer_id, 
+       date, 
+       missed_payments, 
+       defaulted, 
+       recovered_amount,  
+       case 
+            when out_of_funds = 0 then 0 
+            when out_of_funds = 1 then -recoveries_left
+            else missed_payments
+       end as missed_payments_minus_recovered
+from final_recovered_funds
