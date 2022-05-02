@@ -23,7 +23,7 @@ dates_per_fund as (
     group by fund_id, currency
 ),
 
-all_generates_dates as (
+all_generated_dates as (
     select weekdays.date, fund_id, currency from dates_per_fund, weekdays
     where weekdays.date >= min_date
     and max_date >= weekdays.date 
@@ -31,16 +31,17 @@ all_generates_dates as (
 
 all_dates_with_missing_data as (
     select 
-        all_generates_dates.date, 
-        all_generates_dates.fund_id,
+        all_generated_dates.date, 
+        all_generated_dates.fund_id,
         nav,
         rate,
         all_generates_dates.currency,
-        count(nav) over (partition by all_generates_dates.fund_id order by all_generates_dates.date) as nav_helper,
-        count(rate) over (partition by all_generates_dates.fund_id order by all_generates_dates.date) as fx_helper
-    from all_generates_dates
-    left join fund_prices on all_generates_dates.fund_id = fund_prices.fund_id and all_generates_dates.date = fund_prices.date
-    left join fx on all_generates_dates.currency = fx.from_currency and all_generates_dates.date = fx.date
+        --ffill is not available in sqlite, so we use count + first_value trick!
+        count(nav) over (partition by all_generated_dates.fund_id order by all_generated_dates.date) as nav_helper, 
+        count(rate) over (partition by all_generated_dates.fund_id order by all_generated_dates.date) as fx_helper
+    from all_generated_dates
+    left join fund_prices on all_generated_dates.fund_id = fund_prices.fund_id and all_generated_dates.date = fund_prices.date
+    left join fx on all_generated_dates.currency = fx.from_currency and all_generated_dates.date = fx.date
 ),
 
 all_dates_with_filled_data as (
