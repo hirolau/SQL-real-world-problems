@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Before you get your first job with heavy SQL usage it is often difficult to understand what kind of queries you might en up writing. Is all I need joins and group by to be fluent in SQL?
+Before you get your first job with heavy SQL usage it is often difficult to understand what kind of queries you might end up writing. Is all I need joins and group by to be fluent in SQL?
 
-This respository contains a small dataset and 5 questions I have encountered as an analyst in the finacial sector. I have tried ordering them making them progressivly harder. I also try to select problems that use a single or max 2 tables to keep it simple.
+This repository contains a small dataset and 5 questions I have encountered as an analyst in the financial sector. I have tried ordering them making them progressively harder. I also try to select problems that use a single or max 2 tables to keep it simple.
 
-If you are unfamliar with window functions and recursion you will struggle with all but the first question. Go read up on those concepts first.
+If you are unfamiliar with window functions and recursion you will struggle with all but the first question. Go read up on those concepts first.
 
-To query the database, you can use Python + Jupyter Notebook + sqlite. Alternativly you can download some software build for querying SQLite databases, for example this: https://sqlitebrowser.org/. Note that window functions is a rather recent addition to the SQLite database, so make sure you are using a recent version. 
+To query the database, you can use Python + Jupyter Notebook + sqlite. Alternatively you can download some software build for querying SQLite databases, for example this: https://sqlitebrowser.org/. Note that window functions is a rather recent addition to the SQLite database, so make sure you are using a recent version. 
 
 The database is in this repository, and is called `data.db`. The data is also available
 in csv format in the folder `input_data`.
@@ -101,11 +101,11 @@ select * from fund_prices order by fund_id, date desc limit 5
 
 ## 3. Calculate filled_close stock prices
 
-For stock prices, we need a close price each day. But for illiquid stocks if often happens that there are no trades for days or week! In these cases we need to caluclate
+For stock prices, we need a close price each day. But for illiquid stocks if often happens that there are no trades for days or week! In these cases we need to     
 a new price with the type `filled_close`. The price should follow these 3 rules: If a `close` price exists, that should ALWAYS be used. If no `close` price exists it should use the last available  `filled_close` price if allowed given `bid`/`ask`. The `filled_close` should never be outside of the `bid`-`ask` spread, and if it is it should be adjusted to match either `bid` or `ask`.
 
-See this graph as an example, where the green line is the new caluclated 
-filled close (note that the green line continures under the red).
+See this graph as an example, where the green line is the new calculate 
+filled close (note that the green line continues under the red).
 
 ![Filled Close Example](filled_close.png)
 
@@ -113,7 +113,7 @@ filled close (note that the green line continures under the red).
 
 ### Task:
 
-Write a query that calculates this new `filled_close` values. You can assume that on all relvant days both `bid` and `ask` always exist. 
+Write a query that calculates this new `filled_close` values. You can assume that on all relevant days both `bid` and `ask` always exist. 
 
 ### Difficulty:
 
@@ -146,7 +146,7 @@ select * from stock_prices order by stock_id desc, date desc limit 10
 The table `missed_payments` shows missed payments by customers each month.
 A variable called `defaulted` indicates if customer has defaulted or not (defaulted==1==True, non-defaulted==0==False).
 
-Due to new internal rules this variable needs to be adjusted. If a customer defaults (again) within 3 months of getting cured these perdiods should also be considered defaulted. If there are 4 months or more between defaults these 4 periods should remain non-defaulted. The periods at the beginning and end of the time series should not be affected by this rule, since we do not know if customers will default in the future.
+Due to new internal rules this variable needs to be adjusted. If a customer defaults (again) within 3 months of getting cured these periods should also be considered defaulted. If there are 4 months or more between defaults these 4 periods should remain non-defaulted. The periods at the beginning and end of the time series should not be affected by this rule, since we do not know if customers will default in the future.
 
 Customer with customer_id=3 is a good starting point to look at.
 
